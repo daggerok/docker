@@ -1,0 +1,19 @@
+mongo:
+  container_name: mongo
+  image: mongo
+  environment:
+    - MONGO_PORT_27017_TCP_ADDR=localhost
+    - MONGO_PORT_27017_TCP_PORT=27017
+  ports:
+    - "27017:27017"
+##https://github.com/mongo-express/mongo-express-docker
+#mongo-express:
+#  container_name: mongo-express
+#  image: mongo-express
+#  environment:
+#    ME_CONFIG_OPTIONS_EDITORTHEME: ambiance
+#    ME_CONFIG_SITE_BASEURL: /
+#  ports:
+#    - "8081:8081"
+#  links:
+#    - mongo
