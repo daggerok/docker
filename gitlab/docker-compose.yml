@@ -1,0 +1,15 @@
+jenkins-gitlab-gitlab:
+  container_name: jenkins-gitlab-gitlab
+  image: 'gitlab/gitlab-ce:8.15.3-ce.0'
+  environment:
+    GITLAB_OMNIBUS_CONFIG: |
+      external_url 'http://localhost'
+      gitlab_rails['gitlab_shell_ssh_port'] = 2221
+  ports:
+    - '80:80'
+    - '443:443'
+    - '2221:22'
+  volumes:
+    - './etc/gitlab:/etc/gitlab'
+    - './var/log/gitlab:/var/log/gitlab'
+    - './var/opt/gitlab:/var/opt/gitlab'
