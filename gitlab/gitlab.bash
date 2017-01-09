@@ -4,8 +4,10 @@ docker rm gitlab
 docker pull gitlab/gitlab-ce:$GITLAB_VERSION
 
 # docker run --detach \
-#   --publish 443:443 --publish 80:80 --publish 22:22 \
 #   --name gitlab \
+#   --publish 2222:22 \
+#   --publish 80:80 \
+#   --publish 443:443 \
 #   --volume $PWD/gitlab/config:/etc/gitlab \
 #   --volume $PWD/gitlab/logs:/var/log/gitlab \
 #   --volume $PWD/gitlab/data:/var/opt/gitlab \
