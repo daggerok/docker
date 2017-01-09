@@ -1,9 +1,18 @@
-my-jenkins-container:
-  container_name: my-jenkins-container
+jenkins:
+  container_name: jenkins
   image: 'jenkins:2.32.1'
   ports:
     - '50000:50000'
     - '8080:8080'
-    - '2222:22'
   volumes:
     - './var/jenkins_home:/var/jenkins_home'
+
+# jenkins-from-dokerfile-container:
+#   container_name: jenkins-from-dokerfile-container
+#   build: .
+#   image: 'jenkins:2.32.1'
+#   ports:
+#     - '50000:50000'
+#     - '8080:8080'
+#   volumes:
+#     - './var/jenkins_home:/var/jenkins_home'
