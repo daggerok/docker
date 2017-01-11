@@ -1,5 +1,5 @@
-mongo:
-  container_name: mongo # a custom mongo container_name
+my-mongo:
+  container_name: my-mongo # a custom mongo container_name
   image: mongo
   environment:
     - MONGO_PORT_27017_TCP_ADDR=localhost
@@ -8,8 +8,8 @@ mongo:
     - "27017:27017"
 
 ##https://github.com/mongo-express/mongo-express-docker
-#mongo-express:
-#  container_name: mongo-express
+#my-mongo-express:
+#  container_name: my-mongo-express
 #  image: mongo-express
 #  ports:
 #    - "8081:8081"
@@ -17,6 +17,6 @@ mongo:
 #    - mongo # a custom mongo container_name
 #  environment:
 #    # should be a custom mongo container name:
-#    ME_CONFIG_MONGODB_SERVER: mongo
+#    ME_CONFIG_MONGODB_SERVER: my-mongo
 #    ME_CONFIG_OPTIONS_EDITORTHEME: ambiance
 #    ME_CONFIG_SITE_BASEURL: /

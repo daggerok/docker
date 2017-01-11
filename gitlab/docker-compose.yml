@@ -1,5 +1,6 @@
-jenkins-gitlab-gitlab:
-  container_name: jenkins-gitlab-gitlab
+my-gitlab:
+  hostname: my-gitlab
+  container_name: my-gitlab
   image: 'gitlab/gitlab-ce:8.15.3-ce.0'
   environment:
     GITLAB_OMNIBUS_CONFIG: |
@@ -8,7 +9,7 @@ jenkins-gitlab-gitlab:
   ports:
     - '80:80'
     - '443:443'
-    - '2221:22'
+    - '2222:22'
   volumes:
     - './etc/gitlab:/etc/gitlab'
     - './var/log/gitlab:/var/log/gitlab'

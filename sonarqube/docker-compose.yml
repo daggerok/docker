@@ -1,5 +1,5 @@
-sonarqube:
-  container_name: sonarqube
+my-sonarqube:
+  container_name: my-sonarqube
   image: sonarqube:latest
   ports:
     - "9000:9000"

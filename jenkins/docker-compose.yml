@@ -1,5 +1,6 @@
-jenkins:
-  container_name: jenkins
+my-jenkins:
+  hostname: my-jenkins
+  container_name: my-jenkins
   image: 'jenkins:2.32.1'
   ports:
     - '50000:50000'
@@ -8,6 +9,7 @@ jenkins:
     - './var/jenkins_home:/var/jenkins_home'
 
 # jenkins-from-dokerfile-container:
+#   hostname: jenkins-from-dokerfile-container
 #   container_name: jenkins-from-dokerfile-container
 #   build: .
 #   image: 'jenkins:2.32.1'

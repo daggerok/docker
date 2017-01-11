@@ -1,10 +1,10 @@
-mysql:
-  container_name: mysql
+my-mysql:
+  container_name: my-mysql
   image: mysql:5
   environment:
-    - MYSQL_ROOT_PASSWORD=mysql
-    - MYSQL_PASSWORD=mysql
-    - MYSQL_USER=mysql
-    - MYSQL_DATABASE=mysql
+    - MYSQL_ROOT_PASSWORD=my-mysql
+    - MYSQL_PASSWORD=my-mysql
+    - MYSQL_USER=my-mysql
+    - MYSQL_DATABASE=my-mysql
   ports:
     - "3306:3306"

@@ -1,13 +1,13 @@
- rabbitmq:
+ my-rabbitmq:
    image: rabbitmq
-   container_name: rabbitmq
+   container_name: my-rabbitmq
    ports:
      - "5672:5672"
 
 # # rabbit admin: http://localhost:15672
-# rabbit-admin:
+# my-rabbit-admin:
 #   image: rabbitmq:3-management
-#   container_name: rabbitmq-admin
+#   container_name: my-rabbitmq-admin
 #   environment:
 #     RABBITMQ_DEFAULT_USER: test
 #     RABBITMQ_DEFAULT_PASS: test
