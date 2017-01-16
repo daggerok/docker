@@ -1,17 +1,21 @@
+# broker container
 my-rabbitmq:
   image: rabbitmq:3.6.6
   container_name: my-rabbitmq
   hostname: my-rabbitmq
-#  environment:
-#    RABBITMQ_DEFAULT_USER: guest
-#    RABBITMQ_DEFAULT_PASS: guest
-#    RABBITMQ_ERLANG_COOKIE: test
+  #environment:
+  #  RABBITMQ_DEFAULT_USER: guest
+  #  RABBITMQ_DEFAULT_PASS: guest
+  #  RABBITMQ_ERLANG_COOKIE: test
+  ## use env0file instead:
   env_file:
   - './.docker.secrets'
   ports:
   - '5672:5672'
   volumes_from:
   - my-rabbitmq-data
+
+# storage container
 my-rabbitmq-data:
   image: rabbitmq:3.6.6
   tty: true
@@ -21,7 +25,7 @@ my-rabbitmq-data:
   - './etc/rabbitmq:/etc/rabbitmq'
   stdin_open: true
 
-# rabbit admin: http://localhost/
+# admin container: http://localhost/
 my-rabbitmq-admin:
   image: rabbitmq:3.6.6-management
   container_name: my-rabbitmq-admin
