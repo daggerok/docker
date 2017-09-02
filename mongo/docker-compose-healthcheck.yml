@@ -4,12 +4,12 @@ services:
     container_name: mongo
     image: healthcheck/mongo:latest
     ports: ["27017:27017"]
-    networks: [vertx-backing-services]
+    networks: [backing-services]
     volumes: ["mongo-data:/data/db"]
     environment:
       JAVA_OPTS: ""
 volumes:
   mongo-data: {}
 networks:
-  vertx-backing-services:
+  backing-services:
     driver: bridge
