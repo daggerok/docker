@@ -1,0 +1,15 @@
+version: "2.1"
+services:
+  mongo:
+    container_name: mongo
+    image: healthcheck/mongo:latest
+    ports: ["27017:27017"]
+    networks: [vertx-backing-services]
+    volumes: ["mongo-data:/data/db"]
+    environment:
+      JAVA_OPTS: ""
+volumes:
+  mongo-data: {}
+networks:
+  vertx-backing-services:
+    driver: bridge
