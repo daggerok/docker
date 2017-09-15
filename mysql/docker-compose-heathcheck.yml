@@ -10,7 +10,7 @@ services:
       - MYSQL_DATABASE=mysql
     volumes:
       - "mysql-data:/etc/mysql"
-      - "mysql-data:/var/lib/mysqll"
+      - "mysql-data:/var/lib/mysql"
     ports: ["3306:3306"]
     networks: [backing-services]
 volumes:
