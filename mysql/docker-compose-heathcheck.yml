@@ -8,9 +8,7 @@ services:
       - MYSQL_PASSWORD=mysql
       - MYSQL_USER=mysql
       - MYSQL_DATABASE=mysql
-    volumes:
-      - "mysql-data:/etc/mysql"
-      - "mysql-data:/var/lib/mysql"
+    volumes: ["mysql-data:/etc/mysql:rw"]
     ports: ["3306:3306"]
     networks: [backing-services]
 volumes:
