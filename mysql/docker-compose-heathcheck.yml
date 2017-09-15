@@ -1,0 +1,20 @@
+version "2.1"
+services:
+  mysql:
+    # image: mysql:5
+    image: healthcheck/mysql:latest
+    environment:
+      - MYSQL_ROOT_PASSWORD=mysql
+      - MYSQL_PASSWORD=mysql
+      - MYSQL_USER=mysql
+      - MYSQL_DATABASE=mysql
+    volumes:
+      - "mysql-data:/etc/mysql"
+      - "mysql-data:/var/lib/mysqll"
+    ports: ["3306:3306"]
+    networks: [backing-services]
+volumes:
+  mysql-data: {}
+networks:
+  backing-services:
+    driver: bridge
