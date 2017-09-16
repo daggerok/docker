@@ -4,17 +4,18 @@ services:
     # image: mysql:5
     image: healthcheck/mysql:latest
     environment:
-      - MYSQL_ROOT_PASSWORD=mysql
-      - MYSQL_PASSWORD=mysql
-      - MYSQL_USER=mysql
-      - MYSQL_DATABASE=mysql
+      - MYSQL_ROOT_PASSWORD=app
+      - MYSQL_PASSWORD=app
+      - MYSQL_USER=app
+      - MYSQL_DATABASE=app
     volumes:
-      - "mysql-data:/etc/mysql:rw"
-      - "mysql-data:/var/lib/mysql/data:rw"
+      - mysql-data:/var/lib/mysql:rw
+      - mysql-etc:/etc/mysql:rw
     ports: ["3306:3306"]
     networks: [backing-services]
 volumes:
   mysql-data: {}
+  mysql-etc: {}
 networks:
   backing-services:
     driver: bridge
