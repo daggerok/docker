@@ -1,8 +1,6 @@
 # broker container
 my-rabbitmq:
-  image: rabbitmq:3.6.6
-  container_name: my-rabbitmq
-  hostname: my-rabbitmq
+  image: rabbitmq:3.6.6]
   #environment:
   #  RABBITMQ_DEFAULT_USER: guest
   #  RABBITMQ_DEFAULT_PASS: guest
@@ -28,12 +26,9 @@ my-rabbitmq-data:
 # admin container: http://localhost/
 my-rabbitmq-admin:
   image: rabbitmq:3.6.6-management
-  container_name: my-rabbitmq-admin
-  hostname: my-rabbitmq-admin
   env_file:
    - '.docker.secrets'
   ports:
   - '80:15672'
-  - '25672:25672'
   links:
   - 'my-rabbitmq:rabbit'
