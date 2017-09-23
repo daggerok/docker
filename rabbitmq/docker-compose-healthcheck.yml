@@ -5,11 +5,6 @@ services:
     volumes: ["rabbitmq-data:/var/lib/rabbitmq"]
     ports: ["5672:5672"]
     networks: [backing-services]
-  rabbitmq-admin:
-    depends_on: [rabbitmq]
-    image: rabbitmq:3.6.12-management-alpine
-    ports: ["15672:15672"]
-    networks: [backing-services]
 volumes:
   rabbitmq-data: {}
 networks:
