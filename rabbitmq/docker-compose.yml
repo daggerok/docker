@@ -1,34 +1,16 @@
-# broker container
-my-rabbitmq:
-  image: rabbitmq:3.6.6]
-  #environment:
-  #  RABBITMQ_DEFAULT_USER: guest
-  #  RABBITMQ_DEFAULT_PASS: guest
-  #  RABBITMQ_ERLANG_COOKIE: test
-  ## use env0file instead:
-  env_file:
-  - './.docker.secrets'
-  ports:
-  - '5672:5672'
-  volumes_from:
-  - my-rabbitmq-data
-
-# storage container
-my-rabbitmq-data:
-  image: rabbitmq:3.6.6
-  tty: true
-  command: chown -v -R 999:999 /var/lib/rabbitmq
-  volumes:
-  - './var/lib/rabbitmq:/var/lib/rabbitmq'
-  - './etc/rabbitmq:/etc/rabbitmq'
-  stdin_open: true
-
-# admin container: http://localhost/
-my-rabbitmq-admin:
-  image: rabbitmq:3.6.6-management
-  env_file:
-   - '.docker.secrets'
-  ports:
-  - '80:15672'
-  links:
-  - 'my-rabbitmq:rabbit'
+version: "2.1"
+services:
+  rabbitmq:
+    image: rabbitmq:3.6.12-management-alpine
+    volumes:
+      - "rabbitmq-data:/var/lib/rabbitmq"
+      - "rabbitmq-data:/etc/rabbitmq"
+    ports:
+      - "5672:5672"
+      - "15672:15672"
+    networks: [backing-services]
+volumes:
+  rabbitmq-data: {}
+networks:
+  backing-services:
+    driver: bridge
