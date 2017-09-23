@@ -1,0 +1,16 @@
+version: "2.1"
+services:
+  rabbitmq:
+    build: .
+    volumes:
+      - "rabbitmq-data:/var/lib/rabbitmq"
+      - "rabbitmq-data:/etc/rabbitmq"
+    ports:
+      - "5672:5672"
+      - "15672:15672"
+    networks: [backing-services]
+volumes:
+  rabbitmq-data: {}
+networks:
+  backing-services:
+    driver: bridge
