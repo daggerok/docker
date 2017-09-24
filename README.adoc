@@ -1,0 +1,14 @@
+# docker
+collection of docker / docker-compose files for:
+
+. dind
+. gitlab
+. jenkins
+. mongo
+. mysql
+. oracle
+. rabbitmq
+. redis
+. sonarqube
+. spring-boot (java jar)
+. etc...
