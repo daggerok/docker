@@ -1,0 +1,29 @@
+version: "2.1"
+services:
+  rabbitmq:
+    restart: unless-stopped
+    build: ../rabbitmq/custom
+    volumes:
+      - "rabbitmq-data:/var/lib/rabbitmq"
+      - "rabbitmq-data:/etc/rabbitmq"
+    ports:
+      - "5672:5672"
+      - "15672:15672"
+    networks: [backing-services]
+  config-server:
+    restart: unless-stopped
+    depends_on:
+      rabbitmq:
+        condition: service_healthy
+    build: .
+    environment:
+      SPRING_RABBITMQ_HOST: rabbitmq
+    volumes: ["config-server-data:/opt/app"]
+    ports: ["8888:8888"]
+    networks: [backing-services]
+volumes:
+  rabbitmq-data: {}
+  config-server-data: {}
+networks:
+  backing-services:
+    driver: bridge
