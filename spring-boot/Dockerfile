@@ -6,6 +6,6 @@ RUN mkdir -p /opt/app \
 VOLUME ["/opt/app"]
 ENTRYPOINT ["java", "-jar", "/opt/app/app.jar"]
 WORKDIR /opt/app
-COPY ./build/libs/config-server-0.0.1.jar ./app.jar
+COPY ./build/libs/spring-config-0.0.1.jar ./app.jar
 EXPOSE 8888
 HEALTHCHECK --interval=30s --timeout=30s --retries=10 CMD curl -f http://127.0.0.1:8888/health || exit 1
