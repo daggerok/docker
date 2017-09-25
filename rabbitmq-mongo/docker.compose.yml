@@ -31,7 +31,7 @@ services:
       ME_CONFIG_MONGODB_SERVER: mongo
       ME_CONFIG_BASICAUTH_USERNAME: guest
       ME_CONFIG_BASICAUTH_PASSWORD: guest
-    ports: ["8002:8081"]
+    ports: ["8081:8081"]
     networks: [backing-services]
 volumes:
   rabbitmq-data: {}
