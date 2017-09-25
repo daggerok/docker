@@ -9,6 +9,7 @@ collection of docker / docker-compose files for:
 . mysql
 . nginx
 . oracle
+. rabbitmq-mongo
 . rabbitmq
 . redis
 . sonarqube
