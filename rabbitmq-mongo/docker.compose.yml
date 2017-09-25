@@ -1,0 +1,41 @@
+version: "2.1"
+services:
+  rabbitmq:
+    restart: unless-stopped
+    build: ./rabbitmq
+    environment:
+      RABBITMQ_DEFAULT_USER: guest
+      RABBITMQ_DEFAULT_PASS: guest
+    ports:
+      - "5672:5672"
+      - "15672:15672"
+      - "25672:25672"
+    volumes: ["rabbitmq-data:/var/lib/rabbitmq"]
+    networks: [backing-services]
+  mongo:
+    restart: unless-stopped
+    image: healthcheck/mongo:latest
+    environment:
+      MONGO_PORT_27017_TCP_PORT: 27017
+      JAVA_OPTS: ""
+    ports: ["27017:27017"]
+    volumes: ["mongo-data:/data/db"]
+    networks: [backing-services]
+  mongo-express:
+    restart: unless-stopped
+    depends_on:
+      mongo:
+        condition: service_healthy
+    image: mongo-express:0.42.2
+    environment:
+      ME_CONFIG_MONGODB_SERVER: mongo
+      ME_CONFIG_BASICAUTH_USERNAME: guest
+      ME_CONFIG_BASICAUTH_PASSWORD: guest
+    ports: ["8002:8081"]
+    networks: [backing-services]
+volumes:
+  rabbitmq-data: {}
+  mongo-data: {}
+networks:
+  backing-services:
+    driver: bridge
