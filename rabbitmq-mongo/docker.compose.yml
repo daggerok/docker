@@ -2,7 +2,7 @@ version: "2.1"
 services:
   rabbitmq:
     restart: unless-stopped
-    build: ./rabbitmq
+    build: ./rabbitmq-healthcheck
     environment:
       RABBITMQ_DEFAULT_USER: guest
       RABBITMQ_DEFAULT_PASS: guest
