@@ -2,6 +2,7 @@
 
 collection of docker / docker-compose files for:
 
+. cassandra
 . dind
 . gitlab
 . jenkins

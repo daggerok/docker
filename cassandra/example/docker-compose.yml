@@ -1,0 +1,22 @@
+version: "2.1"
+
+services:
+
+  cassadnra:
+    image: 127.0.0.1:5000/cassandra
+    build:
+      context: ../cassandra
+    restart: unless-stopped
+    ports: ["9042:9042"]
+    volumes:
+      - cassandra-data:/var/lib/cassandra
+      - cassandra-data:/home/cassandra/.cassandra
+      - ./docker-entrypoint-initdb.d:/docker-entrypoint-initdb.d
+    networks: [backing-services]
+
+volumes:
+  cassandra-data: {}
+
+networks:
+  backing-services:
+
