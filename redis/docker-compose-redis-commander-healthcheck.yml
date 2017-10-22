@@ -9,9 +9,7 @@ services:
     volumes: ["redis-data:/data"]
 
   redis-commander:
-    build:
-      context: .
-      dockerfile: ./redis-commander-healthcheck/Dockerfile
+    build: ./redis-commander-healthcheck
     depends_on:
       redis:
         condition: service_healthy
