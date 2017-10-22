@@ -1,0 +1,56 @@
+version: "3.3"
+
+services:
+
+  visualizer:
+    image: dockersamples/visualizer:stable
+    ports: ["8080:8080"]
+    stop_grace_period: 1m30s
+    volumes: ["/var/run/docker.sock:/var/run/docker.sock"]
+    restart: unless-stopped
+    deploy:
+      placement:
+        constraints: [node.role == manager]
+
+  redis-healthcheck:
+    image: healthcheck/redis:alpine
+    ports: ["6379:6379"]
+    networks: [backing-services]
+    volumes: ["redis-healthcheck-data:/data"]
+    restart: unless-stopped
+    deploy:
+      mode: global
+      restart_policy:
+        condition: on-failure
+        delay: 5s
+        window: 15s
+      placement:
+        constraints: [node.role == manager]
+
+  redis-commander-healthcheck:
+    image: 127.0.0.1:5000/redis-commander-healthcheck
+    depends_on: [redis-healthcheck]
+    build:
+      context: .
+      args:
+        REDIS_HOST: redis-healthcheck
+    ports: ["8081:8081"]
+    networks:
+      - backing-services
+      - public
+    restart: unless-stopped
+    deploy:
+      mode: replicated
+      replicas: 1
+      endpoint_mode: vip
+      restart_policy:
+        condition: on-failure
+        delay: 5s
+        window: 15s
+
+volumes:
+  redis-healthcheck-data:
+
+networks:
+  backing-services:
+  public:
