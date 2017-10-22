@@ -1,0 +1,28 @@
+version: "2.1"
+
+services:
+
+  redis:
+    image: healthcheck/redis:alpine
+    ports: ["6379:6379"]
+    networks: [backing-services]
+    volumes: ["redis-data:/data"]
+
+  redis-commander:
+    build:
+      context: .
+      dockerfile: ./redis-commander-healthcheck/Dockerfile
+    depends_on:
+      redis:
+        condition: service_healthy
+    image: 127.0.0.1:5000/redis-commander-healthcheck
+    ports: ["8081:8081"]
+    networks: [backing-services]
+    command: " --redis-host redis "
+
+volumes:
+  redis-data: {}
+
+networks:
+  backing-services:
+    driver: bridge
