@@ -3,7 +3,7 @@
 collection of docker / docker-compose files for:
 
 . link:cassandra/[cassandra]
-. link:dind/[dind]
+. link:docker-in-docker/[docker in docker (dind)]
 . link:gitlab/[gitlab]
 . link:jenkins/[jenkins]
 . link:kong/[kong]
