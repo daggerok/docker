@@ -2,18 +2,18 @@
 
 collection of docker / docker-compose files for:
 
-. cassandra
-. dind
-. gitlab
-. jenkins
-. kong
-. mongo
-. mysql
-. nginx
-. oracle
-. rabbitmq-mongo
-. rabbitmq
-. redis
-. sonarqube
-. spring-boot (java jar)
+. link:cassandra/[cassandra]
+. link:dind/[dind]
+. link:gitlab/[gitlab]
+. link:jenkins/[jenkins]
+. link:kong/[kong]
+. link:mongo/[mongo]
+. link:mysql/[mysql]
+. link:nginx/[nginx]
+. link:oracle/[oracle]
+. link:rabbitmq-mongo/[rabbitmq-mongo]
+. link:rabbitmq/[rabbitmq]
+. link:redis/[redis]
+. link:sonarqube/[sonarqube]
+. link:spring-boot/[spring-boot (java jar)]
 . etc...
