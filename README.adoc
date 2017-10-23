@@ -6,6 +6,7 @@ collection of docker / docker-compose files for:
 . dind
 . gitlab
 . jenkins
+. kong
 . mongo
 . mysql
 . nginx
