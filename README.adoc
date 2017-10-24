@@ -11,6 +11,7 @@ collection of docker / docker-compose files for:
 . link:mysql/[mysql]
 . link:nginx/[nginx]
 . link:oracle/[oracle]
+. link:postgres/[postgres]
 . link:rabbitmq-mongo/[rabbitmq-mongo]
 . link:rabbitmq/[rabbitmq]
 . link:redis/[redis]
