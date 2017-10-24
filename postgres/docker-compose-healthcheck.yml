@@ -1,0 +1,19 @@
+version: "2.1"
+
+services:
+
+  postgres:
+    image: healthcheck/postgres:alpine
+    volumes: ["postgres-data:/var/lib/postgresql/data"]
+    networks: [backing-services]
+    ports: ["5432:5432"]
+    environment:
+      POSTGRES_DB: db
+      POSTGRES_USER: user
+      POSTGRES_PASSWORD: password
+
+volumes:
+  postgres-data: {}
+
+networks:
+  backing-services:
