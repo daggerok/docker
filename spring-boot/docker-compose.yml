@@ -1,5 +1,7 @@
 version: "2.1"
+
 services:
+
   rabbitmq:
     restart: unless-stopped
     build: ../rabbitmq/custom
@@ -10,7 +12,8 @@ services:
       - "5672:5672"
       - "15672:15672"
     networks: [backing-services]
-  spring-config:
+
+  app:
     restart: unless-stopped
     depends_on:
       rabbitmq:
@@ -18,12 +21,14 @@ services:
     build: .
     environment:
       SPRING_RABBITMQ_HOST: rabbitmq
-    volumes: ["spring-config-data:/opt/app"]
+    volumes: ["app-data:/home/app"]
     ports: ["8888:8888"]
     networks: [backing-services]
+
 volumes:
   rabbitmq-data: {}
-  spring-config-data: {}
+  app-data: {}
+
 networks:
   backing-services:
     driver: bridge
