@@ -13,7 +13,7 @@ services:
       - "15672:15672"
     networks: [backing-services]
 
-  app:
+  config-server:
     restart: unless-stopped
     depends_on:
       rabbitmq:
@@ -21,14 +21,37 @@ services:
     build: .
     environment:
       SPRING_RABBITMQ_HOST: rabbitmq
-    volumes: ["app-data:/home/app"]
+    volumes: ["config-server-data:/home/app"]
     ports: ["8888:8888"]
     networks: [backing-services]
 
+  app:
+    image: 127.0.0.1:5000/app
+    build:
+      context: .
+      dockerfile: ./Dockerfile
+    depends_on:
+      rabbitmq:
+        condition: service_healthy
+    volumes: ["app-data:/home/app"]
+    ports: ["8080:8080"]
+    mem_limit: 512m
+    networks:
+      - backing-services
+      - public
+    healthcheck:
+      test: ["CMD-SHELL", "curl -f http://127.0.0.1:8080/ || exit 1"]
+      #interval: 10s
+      timeout: 10s
+      retries: 15
+
 volumes:
   rabbitmq-data: {}
+  config-server-data: {}
   app-data: {}
 
 networks:
   backing-services:
+    driver: bridge
+  public:
     driver: bridge
