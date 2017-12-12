@@ -5,6 +5,7 @@ collection of docker / docker-compose files for:
 . link:cassandra/[cassandra]
 . link:docker-in-docker/[docker in docker (dind)]
 . link:glassfish/[glassfish]
+. link:jboss-eap-6.4/[JBoss EAP 6.4]
 . link:gitlab/[gitlab]
 . link:jenkins/[jenkins]
 . link:kong/[kong]
