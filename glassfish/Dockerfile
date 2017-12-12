@@ -27,8 +27,8 @@ RUN wget ${GLASSFISH_URL} -O ${GLASSFISH_USER_HOME}/${GLASSFISH_FILE} \
 
 ## check all apps healthy (in current example we are expecting to have apps with /ui/ and /rest-api/ contexts deployed:
 #HEALTHCHECK --interval=1s --timeout=3s --retries=30 \
-# CMD wget -qS http://127.0.0.1:8080/rest-api/health \
-#  && wget -qS http://127.0.0.1:8080/ui/ \
+# CMD wget -q --spider http://127.0.0.1:8080/rest-api/health \
+#  && wget -q --spider http://127.0.0.1:8080/ui/ \
 #  || exit 1
 
 # deploy apps
