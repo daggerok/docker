@@ -5,7 +5,7 @@ services:
   gradle-app:
     build:
       context: .
-      dockerfile: ./docker/gradle/Dockerfile
+      dockerfile: ./Dockerfile
     volumes: ["gradle-app-data:/home/app"]
     ports:
 #      - "5005:5005"
