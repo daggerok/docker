@@ -1,0 +1,21 @@
+ersion: "2.1"
+
+services:
+
+  maven-app:
+    build:
+      context: .
+      dockerfile: ./Dockerfile
+    volumes: ["maven-app-data:/home/app"]
+    ports:
+      - "8080:8080"
+#      - "5005:5005"
+    restart: unless-stopped
+    networks: [backing-services]
+
+volumes:
+  maven-app-data: {}
+
+networks:
+  backing-services:
+    driver: bridge
