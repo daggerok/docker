@@ -13,4 +13,4 @@ ENTRYPOINT java -jar ./app.jar && sleep 60
 CMD /bin/bash
 EXPOSE 8080
 HEALTHCHECK --interval=3s --timeout=3s --retries=15 CMD curl -f http://127.0.0.1:8080/health || exit 1
-COPY --chown=appuser ./build/libs/*-all.jar ./app.jar
+COPY --chown=appuser ./build/libs/*.jar ./app.jar
