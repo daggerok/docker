@@ -9,7 +9,7 @@ RUN apk --no-cache add busybox-suid bash curl sudo \
 USER appuser
 WORKDIR /home/appuser
 VOLUME /home/appuser
-ENTRYPOINT java -jar ./app.jar && sleep 60
+ENTRYPOINT java -jar ./app.jar
 CMD /bin/bash
 EXPOSE 8080
 HEALTHCHECK --interval=3s --timeout=3s --retries=15 CMD curl -f http://127.0.0.1:8080/health || exit 1
