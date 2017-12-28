@@ -8,7 +8,7 @@
 
 FROM alpine:3.5
 MAINTAINER Maksim Kostromin https://github.com/daggerok
-RUN apk --no-cache add busybox-suid bash mercurial sudo \
+RUN apk --no-cache --update add busybox-suid bash mercurial sudo \
  && adduser -h /home/hg -s /bin/bash -D -u 1025 hg wheel \
  && echo "hg ALL=(ALL:ALL) NOPASSWD:ALL" >> /etc/sudoers \
  && sed -i "s/.*requiretty$/Defaults !requiretty/" /etc/sudoers \
