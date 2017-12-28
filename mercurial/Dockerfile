@@ -1,7 +1,11 @@
 # docker build -t hg .
 # docker run --rm --name hg -it -p 22:22 -p 8080:8080 hg:latest
+
 # docker exec -it hg bash
 # sudo -s
+
+# hg clone http://localhost:8080/ repo-dir
+# cd repo-dir/
 
 ## disable sudo no password:
 #echo "hg ALL=(ALL:ALL) ALL" >> /etc/sudoers 
