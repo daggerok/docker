@@ -10,6 +10,7 @@ collection of docker / docker-compose files for:
 . link:gitlab/[gitlab]
 . link:jenkins/[jenkins]
 . link:maven/[maven built app]
+. link:mercurial/[mercurial web server]
 . link:kong/[kong]
 . link:mongo/[mongo]
 . link:mysql/[mysql]
