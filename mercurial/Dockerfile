@@ -3,11 +3,14 @@
 # docker exec -it hg bash
 # sudo -s
 
+## disable sudo no password:
+#echo "hg ALL=(ALL:ALL) ALL" >> /etc/sudoers 
+
 FROM alpine:3.5
 MAINTAINER Maksim Kostromin https://github.com/daggerok
 RUN apk --no-cache add busybox-suid bash mercurial sudo \
  && adduser -h /home/hg -s /bin/bash -D -u 1025 hg wheel \
- && echo "hg ALL=(ALL:ALL) ALL" >> /etc/sudoers \
+ && echo "hg ALL=(ALL:ALL) NOPASSWD:ALL" >> /etc/sudoers \
  && sed -i "s/.*requiretty$/Defaults !requiretty/" /etc/sudoers \
  && hgpassword=$(echo Admin.123 | mkpasswd) \
  && echo "hg sudo password: ${hgpassword}" \
