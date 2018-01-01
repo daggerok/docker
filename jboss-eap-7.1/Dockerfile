@@ -21,12 +21,13 @@ ENV JBOSS_URL="https://www.dropbox.com/s/${DROPBOX_HASH}/${JBOSS_FILE}" \
 ENV JBOSS_HOME="${JBOSS_USER_HOME}/${JBOSS_USER}"
 
 RUN apk --no-cache --update add busybox-suid bash wget ca-certificates unzip sudo openssh-client shadow \
- && rm -rf /var/cache/apk/* \
  && addgroup ${JBOSS_USER}-group \
  && echo "${JBOSS_USER} ALL=(ALL) NOPASSWD: ALL" >> /etc/sudoers \
  && sed -i "s/.*requiretty$/Defaults !requiretty/" /etc/sudoers \
  && adduser -h ${JBOSS_USER_HOME} -s /bin/bash -D -u 1025 ${JBOSS_USER} ${JBOSS_USER}-group \
- && usermod -a -G wheel ${JBOSS_USER}
+ && usermod -a -G wheel ${JBOSS_USER} \
+ && apk --no-cache --no-network --purge del busybox-suid ca-certificates unzip shadow \
+ && rm -rf /var/cache/apk/* /tmp/*
 
 USER ${JBOSS_USER}
 WORKDIR ${JBOSS_USER_HOME}
