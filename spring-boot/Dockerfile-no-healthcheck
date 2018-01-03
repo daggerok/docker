@@ -6,6 +6,10 @@ RUN apk --no-cache add busybox-suid bash \
 USER app
 WORKDIR /home/app
 VOLUME ["/home/app"]
-ENTRYPOINT java -jar ./app.jar
+ENTRYPOINT java -XX:+UnlockExperimentalVMOptions \
+                -XX:+UseCGroupMemoryLimitForHeap \
+                -XshowSettings:vm \
+                -jar ./app.jar
+CMD /bin/bash
 EXPOSE 8080
 COPY ./build/libs/*.jar ./app.jar
