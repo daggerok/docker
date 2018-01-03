@@ -6,7 +6,14 @@ RUN apk --no-cache add busybox-suid bash curl \
 USER app
 WORKDIR /home/app
 VOLUME ["/home/app"]
-ENTRYPOINT java -jar ./app.jar
+ENTRYPOINT java -XX:+UnlockExperimentalVMOptions \
+                -XX:+UseCGroupMemoryLimitForHeap \
+                -XshowSettings:vm \
+                -jar ./app.jar
+CMD /bin/bash
 EXPOSE 8888
-HEALTHCHECK --interval=15s --timeout=15s --retries=15 CMD curl -f http://127.0.0.1:8888/health || exit 1
+HEALTHCHECK --interval=1s \
+            --timeout=1s \
+            --retries=33 \
+            CMD curl -f http://127.0.0.1:8888/health || exit 1
 COPY ./build/libs/*.jar ./app.jar
