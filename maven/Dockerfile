@@ -10,7 +10,7 @@ USER appuser
 WORKDIR /home/appuser
 VOLUME /home/appuser
 ENTRYPOINT java -XX:+UnlockExperimentalVMOptions \
-                -XX:+UseCGrouopMemoryLimitForHeap \
+                -XX:+UseCGroupMemoryLimitForHeap \
                 -XshowSettings:vm \
                 -jar ./app.jar
 CMD /bin/bash
