@@ -1,4 +1,4 @@
-FROM openjdk:8u151-jdk-alpine
+FROM openjdk:8u151-jre-alpine
 MAINTAINER Maksim Kostromin https://github.com/daggerok
 RUN apk --no-cache add busybox-suid bash curl sudo \
  && adduser -h /home/appuser -s /bin/bash -D -u 1025 appuser wheel \
