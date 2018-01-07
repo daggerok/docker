@@ -50,3 +50,4 @@ RUN wget ${JBOSS_URL} -O ${JBOSS_USER_HOME}/${JBOSS_FILE} \
 #
 ## deploy apps
 #COPY ./path/to/*.war ./path/to/another/*.war ${JBOSS_HOME}/standalone/deployments/
+#COPY --chown=jboss-eap-7.1 ./path/to/*.war ./path/to/another/*.war ${JBOSS_HOME}/standalone/deployments/
