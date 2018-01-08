@@ -1,3 +1,7 @@
+-- CREATE USER app_user
+--   WITH PASSWORD 'password'
+-- ;
+
 CREATE USER app_user
   WITH PASSWORD 'password'
   SUPERUSER
