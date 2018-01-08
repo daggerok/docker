@@ -1,22 +1,17 @@
 = postgres
 
-.build and deploy
+.build, deploy, migrate..
 ----
 docker-compose build
 
 docker stack deploy -c docker-compose.yaml db
-
-docker stack ls
-docker stack services db
-docker ps # or: docker container ls
-kubectl get svc
 
 kubectl get pods
 # output:
 NAME                        READY     STATUS    RESTARTS   AGE
 postgres-7bbcd69cd7-4s6rd   1/1       Running   0          4m
 
-kubectl port-forward postgres-7bbcd69cd7-4s6rd 5432:5432
+kubectl port-forward postgres-7bbcd69cd7-4s6rd 5432
 
 # now you can connect to `postgres` database on: `127.0.0.1:5432` url via any supported client using `app_user` / `password` creds...
 
