@@ -1,0 +1,23 @@
+version: "2.1"
+
+services:
+
+  kafka:
+    image: daggerok/kafka:v5
+    environment:
+      KAFKA_TOPICS: 'top1,top2,top3'
+    ports:
+    - "2181:2181"
+    - "9092:9092"
+    volumes:
+    - "kafka-data:/home/appuser"
+    - "kafka-data:/var"
+    - "kafka-data:/tmp"
+    networks: [backing-services]
+
+volumes:
+  kafka-data: {}
+
+networks:
+  backing-services:
+    driver: bridge
