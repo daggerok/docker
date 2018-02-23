@@ -12,28 +12,22 @@ RUN apk --no-cache --update add busybox-suid bash curl unzip sudo openssh-client
  && unzip -o /tmp/jce_policy-8.zip -d /tmp \
  && mv -f ${JAVA_HOME}/lib/security ${JAVA_HOME}/lib/backup-security \
  && mv -f /tmp/UnlimitedJCEPolicyJDK8 ${JAVA_HOME}/lib/security \
- && wget -O /tmp/kafka.jar https://github.com/daggerok/embedded-kafka/raw/mvn-repo/daggerok/embedded-kafka/0.0.1/embedded-kafka-0.0.1.jar \
+ && wget -O /home/appuser/kafka.jar https://raw.githubusercontent.com/daggerok/embedded-kafka/mvn-repo/daggerok/embedded-kafka/0.0.2/embedded-kafka-0.0.2.jar \
+ && chown -R appuser:wheel /home/appuser/kafka.jar \
  && apk del busybox-suid unzip openssh-client shadow wget \
  && rm -rf /var/cache/apk/* /tmp/*
 USER appuser
 WORKDIR /home/appuser
 VOLUME /home/appuser
-# ARG JAVA_OPTS_ARGS="\
-#  -Djava.net.preferIPv4Stack=true \
-#  -XX:+UnlockExperimentalVMOptions \
-#  -XX:+UseCGroupMemoryLimitForHeap \
-#  -XshowSettings:vm "
-# ENV JAVA_OPTS="${JAVA_OPTS} ${JAVA_OPTS_ARGS}"
-# ENTRYPOINT java ${JAVA_OPTS} -jar ./app.jar
-# CMD /bin/bash
+CMD /bin/bash
+ARG KAFKA_TOPICS_ARG="\
+topic1,topic2,topic3"
+ENV KAFKA_TOPICS="${KAFKA_TOPICS_ARG}"
 ENTRYPOINT java -Djava.net.preferIPv4Stack=true \
                 -XX:+UnlockExperimentalVMOptions \
                 -XX:+UseCGroupMemoryLimitForHeap \
                 -XshowSettings:vm \
-                -jar /tmp/kafka.jar
-CMD /bin/bash
-#EXPOSE 2181 9092
-#HEALTHCHECK --timeout=1s \
-#            --retries=35 \
-#            CMD curl -f http://127.0.0.1:8080/actuator/health || exit 1
-#COPY --chown=appuser ./build/libs/*.jar ./app.jar
+                -jar /home/appuser/kafka.jar ${KAFKA_TOPICS}
+HEALTHCHECK --timeout=2s \
+            --retries=22 \
+            CMD curl -f http://127.0.0.1:8080/actuator/health || exit 1
