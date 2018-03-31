@@ -1,13 +1,14 @@
 FROM openjdk:8u151-jdk-alpine
 MAINTAINER Maksim Kostromin https://github.com/daggerok/docker
 
-ARG GLASSFISH_USER="glassfish5"
-ARG GLASSFISH_FILE_ARG="glassfish-5.0.zip"
-#ARG GLASSFISH_FILE_ARG="glassfish-5.0-web.zip"
-ENV GLASSFISH_FILE=${GLASSFISH_FILE_ARG}
-ENV GLASSFISH_USER_HOME="/home/${GLASSFISH_USER}"
-ENV GLASSFISH_HOME="${GLASSFISH_USER_HOME}/${GLASSFISH_USER}"
-ENV GLASSFISH_URL="http://download.oracle.com/glassfish/5.0/release/${GLASSFISH_FILE}"
+ARG GLASSFISH_VERSION_ARG="5.0"
+ENV GLASSFISH_VERSION=${GLASSFISH_VERSION_ARG}
+ENV GLASSFISH_USER="glassfish-${GLASSFISH_VERSION}"
+#ENV GLASSFISH_FILE="${GLASSFISH_USER}-web.zip"
+ENV GLASSFISH_FILE="${GLASSFISH_USER}.zip" \
+    GLASSFISH_USER_HOME="/home/${GLASSFISH_USER}"
+ENV GLASSFISH_HOME="${GLASSFISH_USER_HOME}/${GLASSFISH_USER}" \
+    GLASSFISH_URL="http://download.oracle.com/glassfish/${GLASSFISH_VERSION}/release/${GLASSFISH_FILE}"
 
 RUN apk --no-cache --update add busybox-suid bash wget ca-certificates unzip \
  && rm -rf /var/cache/apk/* \
