@@ -10,7 +10,7 @@ RUN apk --no-cache --update add busybox-suid bash curl unzip sudo openssh-client
                   "http://download.oracle.com/otn-pub/java/jce/8/jce_policy-8.zip" \
          -O /tmp/jce_policy-8.zip \
  && unzip -o /tmp/jce_policy-8.zip -d /tmp \
- && mv -f ${JAVA_HOME}/lib/security ${JAVA_HOME}/lib/backup-security \
+ && mv -f ${JAVA_HOME}/lib/security ${JAVA_HOME}/lib/backup-security || true \
  && mv -f /tmp/UnlimitedJCEPolicyJDK8 ${JAVA_HOME}/lib/security \
  && apk del busybox-suid unzip openssh-client shadow wget \
  && rm -rf /var/cache/apk/* /tmp/*
