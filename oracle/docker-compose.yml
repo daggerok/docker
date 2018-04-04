@@ -3,10 +3,11 @@ version: "2.1"
 services:
   oracle:
     image: daggerok/oracle
+    shm_size: 1g
     environment:
-      ORACLE_PWD: password
-    ports:
-    - 1521:1521
+      ORACLE_PWD: oraclepassword
+    ports: ["1521:1521"]
+    networks: [backing-services]
 
 networks:
   backing-services:
