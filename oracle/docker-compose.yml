@@ -9,10 +9,12 @@ services:
     ports: ["1521:1521"]
     networks: [backing-services]
     healthcheck:
-      test: curl -uSYSTEM:$$ORACLE_PWD -v http://127.0.0.1:8080//apex/
-      interval: 20s
-      timeout: 20s
+      test: sleep 10; curl -uSYSTEM:$$ORACLE_PWD -v http://127.0.0.1:8080//apex/
+      #interval: 30s
+      #timeout: 30s
       retries: 20
+    #restart: unless-stopped
+    #mem_limit: 786432000 # container limit: 700Mb (700 * 1024 * 1024)
 
 networks:
   backing-services:
