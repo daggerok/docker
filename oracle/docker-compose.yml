@@ -1,6 +1,13 @@
-version: '2'
+version: "2.1"
+
 services:
   oracle:
     image: daggerok/oracle
+    environment:
+      ORACLE_PWD: password
     ports:
     - 1521:1521
+
+networks:
+  backing-services:
+    driver: bridge
