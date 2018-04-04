@@ -10,9 +10,9 @@ services:
     networks: [backing-services]
     healthcheck:
       test: curl -uSYSTEM:$$ORACLE_PWD -v http://127.0.0.1:8080//apex/
-      interval: 10s
-      timeout: 2s
-      retries: 22
+      interval: 20s
+      timeout: 20s
+      retries: 20
 
 networks:
   backing-services:
