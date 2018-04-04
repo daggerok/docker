@@ -1,0 +1,21 @@
+version: "2.1"
+
+services:
+  my-mysql:
+    image: mysql:5
+    environment:
+      MYSQL_ROOT_PASSWORD: mysqlpassowrd
+      MYSQL_PASSWORD: mysqlpassowrd
+      MYSQL_USER: mysqluser
+      MYSQL_DATABASE: mysqldatabase
+    ports: ["3306:3306"]
+    networks: [backing-services]
+    healthcheck:
+      test: ["CMD", "mysqladmin" ,"ping", "-h", "127.0.0.1"]
+      interval: 10s
+      timeout: 2s
+      retries: 22
+
+networks:
+  backing-services:
+    driver: bridge
