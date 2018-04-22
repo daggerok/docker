@@ -1,0 +1,38 @@
+###
+#
+# This docker compose file Could be used for quick project bootstrap or development apps
+# uses redis server with redis-commander administration UI (https://github.com/joeferner/redis-commander).
+# 
+# To get redis-commander administration tool, open: http://0.0.0.0/
+#
+# Redis connection configuration (per app):
+#
+# server (from docker): mysql
+# server (from local) : 0.0.0.0 or 127.0.0.1 or localhost
+# application user    : app-db-user
+# application password: app-db-password
+# application database: app-database
+#
+###
+
+version: "2.1"
+
+services:
+
+  redis:
+    image: healthcheck/redis:alpine
+    ports: ["6379:6379"]
+    networks: [backing-services]
+    command: " redis-server --appendonly yes "
+
+  redis-ui:
+    image: tenstartups/redis-commander
+    ports: ["8082:8081"]
+    depends_on: [redis]
+    links: ["redis:redis"]
+    networks: [backing-services]
+    command: " --redis-host redis "
+
+networks:
+  backing-services:
+    driver: bridge
