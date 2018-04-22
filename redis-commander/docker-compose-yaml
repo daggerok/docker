@@ -1,0 +1,22 @@
+version: "2.1"
+
+services:
+
+  redis:
+    image: healthcheck/redis:alpine
+    ports: ["6379:6379"]
+    networks: [backing-services]
+    command: " redis-server --appendonly yes "
+
+  redis-ui:
+    image: rediscommander/redis-commander
+    ports: ["8082:8081"]
+    environment:
+      REDIS_HOSTS: app-redis-server:redis:6379
+    depends_on: [redis]
+    links: ["redis:redis"]
+    networks: [backing-services]
+
+networks:
+  backing-services:
+    driver: bridge
