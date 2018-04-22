@@ -36,7 +36,7 @@ services:
   # https://github.com/phpmyadmin/docker
   mysql-ui:
     image: phpmyadmin/phpmyadmin:4.7
-    ports: ["8081:80"]
+    ports: ["80:80"]
     environment:
       PMA_ARBITRARY: 1
       TESTSUITE_PASSWORD: Admin.123
