@@ -1,9 +1,9 @@
 ###
 #
 # This docker compose file Could be used for quick project bootstrap or even development apps
-# uses mysql server with phpMyAdmin administration UI.
+# uses mysql server with phpMyAdmin administration UI (https://github.com/phpmyadmin/docker).
 # 
-# phpMyAdmin connection configuration:
+# phpMyAdmin connection configuration (open: http://0.0.0.0/):
 #
 # server              : mysql
 # user                : root
@@ -33,7 +33,7 @@ services:
       MYSQL_ROOT_PASSWORD: root-db-password
     networks: [backing-services]
 
-  # https://github.com/phpmyadmin/docker
+  # 
   mysql-ui:
     image: phpmyadmin/phpmyadmin:4.7
     ports: ["80:80"]
