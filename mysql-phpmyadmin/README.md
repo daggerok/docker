@@ -10,6 +10,8 @@ user:                 root
 password:             root-db-password
 ```
 
+open: http://0.0.0.0/
+
 ## MySQL connection configuration (per app):
 
 ```
