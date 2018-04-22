@@ -1,4 +1,4 @@
-# This docker compose file bootstrapping fresh mysql server with phpMyAdmin server.
+# mysql + phpMyAdmin docker compose file.
 
 _Could be used for quick project bootstrap or even development_
 
