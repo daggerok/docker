@@ -50,3 +50,7 @@ services:
     depends_on: [mysql]
     links: ["mysql:db"]
     networks: [backing-services]
+
+networks:
+  backing-services:
+    driver: bridge
