@@ -1,0 +1,57 @@
+###
+#
+# # This docker compose file bootstrapping fresh mysql server with phpMyAdmin server.
+#
+# _Could be used for quick project bootstrap or even development_
+# 
+# ## phpMyAdmin connection configuration:
+#
+# ```
+# server:               mysql
+# user:                 root
+# password:             root-db-password
+# ```
+#
+# ## MySQL connection configuration (per app):
+#
+# ```
+# server (from docker): mysql
+# server (from local):  0.0.0.0 or 127.0.0.1 or localhost
+# application user:     app-db-user
+# application password: app-db-password
+# application database: app-database
+# ```
+#
+###
+
+version: "2.1"
+
+services:
+
+  mysql:
+    image: healthcheck/mysql
+    ports: ["3306:3306"]
+    environment:
+      MYSQL_USER: app-db-user
+      MYSQL_PASSWORD: app-db-password
+      MYSQL_DATABASE: app-db-database
+      MYSQL_ROOT_PASSWORD: root-db-password
+    networks: [backing-services]
+
+  # https://github.com/phpmyadmin/docker
+  mysql-ui:
+    image: phpmyadmin/phpmyadmin:4.7
+    ports: ["8081:80"]
+    environment:
+      PMA_ARBITRARY: 1
+      TESTSUITE_PASSWORD: Admin.123
+      PMA_VERBOSES: mysql
+      PMA_HOST: mysql
+      PMA_PORT: 3306
+      MYSQL_USER: app-db-user
+      MYSQL_PASSWORD: app-db-password
+      MYSQL_DATABASE: app-db-database
+      MYSQL_ROOT_PASSWORD: root-db-password
+    depends_on: [mysql]
+    links: ["mysql:db"]
+    networks: [backing-services]
