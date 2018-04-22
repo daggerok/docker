@@ -33,7 +33,6 @@ services:
       MYSQL_ROOT_PASSWORD: root-db-password
     networks: [backing-services]
 
-  # 
   mysql-ui:
     image: phpmyadmin/phpmyadmin:4.7
     ports: ["80:80"]
