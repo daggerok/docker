@@ -1,5 +1,5 @@
 ## eap:
-FROM daggerok/jboss:eap-7.1-eap
+FROM daggerok/jboss:eap-7.1
 
 ## wildfly:
 #FROM daggerok/jboss:wildfly-13.0.0.Final
