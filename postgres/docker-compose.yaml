@@ -8,7 +8,8 @@ services:
       POSTGRES_PASSWORD: password
     ports: ['5432:5432']
     healthcheck:
-      test: ['CMD', 'pg_isready', '-U', 'postgres']
+      test: ['CMD', 'pg_isready', '-h', '127.0.0.1', '-p', '5432', '-d', '$$POSTGRES_DB', '-U', '$$POSTGRES_USER']
+      #test: pg_isready --host=127.0.0.1 --port=5432 --dbname=$$POSTGRES_DB --username=$$POSTGRES_USER
       timeout: 3s
       retries: 33
       interval: 30s
