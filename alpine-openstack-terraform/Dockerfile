@@ -1,8 +1,13 @@
 # docker run --rm -it alpine:3.8 ash
+# ...
+#
+# docker build -t daggerok/devops .
+# docker run --rm -it daggerok/devops
 FROM alpine:3.8
 RUN apk add --upgrade --no-cache ca-certificates \
                                  wget \
  && apk add --upgrade --no-cache terraform \
+                                 git \
  && apk add --upgrade --no-cache musl-dev \
                                  libffi-dev \
                                  openssl-dev \
