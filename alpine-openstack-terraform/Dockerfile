@@ -1,8 +1,12 @@
+# 1)
 # docker run --rm -it alpine:3.8 ash
 # ...
-#
+
+# 2)
 # docker build -t daggerok/devops .
 # docker run --rm -it daggerok/devops
+# ...
+
 FROM alpine:3.8
 RUN apk add --upgrade --no-cache ca-certificates \
                                  wget \
