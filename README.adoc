@@ -2,22 +2,22 @@
 
 collection of docker / docker-compose files for:
 
-- link:./alpine-openstack-terraform/[alpine-openstack-terraform]
+- link:alpine-openstack-terraform/[alpine-openstack-terraform]
 - link:cassandra/[cassandra]
 - link:docker-in-docker/[docker in docker (dind)]
+- link:gitlab/[gitlab]
 - link:glassfish/[glassfish]
 - link:gradle/[gradle built app]
 - link:jboss/[JBoss EAP / WildFly]
-- link:gitlab/[gitlab]
 - link:jenkins/[jenkins]
 - link:maven/[maven built app]
 - link:mercurial/[mercurial web server]
 - link:kong/[kong]
 - link:mongo/[mongo]
 - link:mysql/[mysql]
-- link:./mysql-phpmyadmin/[MySQL + phpMyAdmin]
+- link:mysql-phpmyadmin/[MySQL + phpMyAdmin]
 - link:nginx/[nginx]
-- link:./alpine-openstack-terraform/[openstack]
+- link:alpine-openstack-terraform/[openstack]
 - link:oracle/[oracle]
 - link:postgres/[postgres]
 - link:rabbitmq-mongo/[rabbitmq-mongo]
@@ -25,5 +25,5 @@ collection of docker / docker-compose files for:
 - link:redis/[redis]
 - link:sonarqube/[sonarqube]
 - link:spring-boot/[spring-boot (java jar)]
-- link:./alpine-openstack-terraform/[terraform]
+- link:alpine-openstack-terraform/[terraform]
 - etc...
