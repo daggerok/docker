@@ -6,8 +6,6 @@
 FROM alpine:3.8
 RUN apk add --upgrade --no-cache ca-certificates \
                                  wget \
- && apk add --upgrade --no-cache terraform \
-                                 git \
  && apk add --upgrade --no-cache musl-dev \
                                  libffi-dev \
                                  openssl-dev \
@@ -21,6 +19,7 @@ RUN apk add --upgrade --no-cache ca-certificates \
                                  py2-pip \
  && pip install --upgrade pip \
  && pip install --upgrade python-openstackclient \
+ && apk add --upgrade --no-cache git terraform \
  && apk del --purge --no-cache ca-certificates \
                                wget \
                                musl-dev \
@@ -35,5 +34,4 @@ RUN apk add --upgrade --no-cache ca-certificates \
                                gcc \
                                py2-pip \
  && rm -rf /var/cache/apk/*
- CMD /bin/ash
- 
+CMD /bin/ash
