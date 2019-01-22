@@ -2,6 +2,7 @@
 
 collection of docker / docker-compose files for:
 
+- link:./alpine-openstack-terraform/[alpine-openstack-terraform]
 - link:cassandra/[cassandra]
 - link:docker-in-docker/[docker in docker (dind)]
 - link:glassfish/[glassfish]
@@ -16,6 +17,7 @@ collection of docker / docker-compose files for:
 - link:mysql/[mysql]
 - link:./mysql-phpmyadmin/[MySQL + phpMyAdmin]
 - link:nginx/[nginx]
+- link:./alpine-openstack-terraform/[openstack]
 - link:oracle/[oracle]
 - link:postgres/[postgres]
 - link:rabbitmq-mongo/[rabbitmq-mongo]
@@ -23,4 +25,5 @@ collection of docker / docker-compose files for:
 - link:redis/[redis]
 - link:sonarqube/[sonarqube]
 - link:spring-boot/[spring-boot (java jar)]
+- link:./alpine-openstack-terraform/[terraform]
 - etc...
