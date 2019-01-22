@@ -1,19 +1,34 @@
 # docker run --rm -it alpine:3.8 ash
 FROM apline:3.8
-RUM apk add --no-cache python-dev \
-                       libffi-dev \
-                       py2-cffi \
-                       py2-netifaces \
-                       openssl-dev \
-                       readline-dev \
-                       python2-tkinter \
-                       gcc \
-                       musl-dev \
-                       py2-pip \
-                       terraform \
- && pip install --upgrade --no-cache-dir pip \
+RUN apk add --upgrade --no-cache ca-certificates \
+                                 wget \
+ && apk add --upgrade --no-cache terraform \
+ && apk add --upgrade --no-cache musl-dev \
+                                 libffi-dev \
+                                 openssl-dev \
+                                 readline-dev \
+                                 python-dev \
+                                 python2-tkinter \
+ && apk add --upgrade --no-cache py-setuptools \
+                                 py2-cffi \
+                                 py2-netifaces \
+                                 gcc \
+                                 py2-pip \
+ && pip install --upgrade pip \
  && pip install --upgrade python-openstackclient \
- && apk del --no-cache musl-dev eadline-dev openssl-dev libffi-dev python-dev \
+ && apk del --purge --no-cache ca-certificates \
+                               wget \
+                               musl-dev \
+                               libffi-dev \
+                               python-dev \
+                               openssl-dev \
+                               readline-dev \
+                               py-setuptools \
+                               py2-cffi \
+                               py2-netifaces \
+                               python2-tkinter \
+                               gcc \
+                               py2-pip \
  && rm -rf /var/cache/apk/*
  CMD /bin/ash
  
