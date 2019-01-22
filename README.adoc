@@ -2,7 +2,7 @@
 
 collection of docker / docker-compose files for:
 
-- link:alpine-openstack-terraform/[Alpine, OpenStack, Terraform]
+- link:alpine-openstack-terraform/[Alpine + OpenStack + Terraform]
 - link:cassandra/[cassandra]
 - link:docker-in-docker/[docker in docker (dind)]
 - link:gitlab/[gitlab]
