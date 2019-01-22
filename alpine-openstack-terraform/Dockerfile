@@ -14,12 +14,12 @@ RUN apk add --upgrade --no-cache ca-certificates \
                                  libffi-dev \
                                  openssl-dev \
                                  readline-dev \
+ && apk add --upgrade --no-cache gcc \
+                                 py2-cffi \
                                  python-dev \
                                  python2-tkinter \
- && apk add --upgrade --no-cache py-setuptools \
-                                 py2-cffi \
                                  py2-netifaces \
-                                 gcc \
+                                 py-setuptools \
                                  py2-pip \
  && pip install --upgrade pip \
  && pip install --upgrade python-openstackclient \
