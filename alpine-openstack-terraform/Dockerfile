@@ -1,5 +1,5 @@
 # docker run --rm -it alpine:3.8 ash
-FROM apline:3.8
+FROM alpine:3.8
 RUN apk add --upgrade --no-cache ca-certificates \
                                  wget \
  && apk add --upgrade --no-cache terraform \
