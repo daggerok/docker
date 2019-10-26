@@ -1,0 +1,119 @@
+version: '2.1'
+networks:
+  step5-compose-network:
+    driver: bridge
+services:
+  postgres:
+    image: postgres:alpine
+    labels:
+      MAINTAINER: Maksim Kostromin https://github.com/daggerok
+    ports: ['5432:5432']
+    environment:
+      POSTGRES_DB: postgres
+      POSTGRES_USER: postgres
+      POSTGRES_PASSWORD: postgres
+      POSTGRES_HOST: postgres
+      POSTGRES_PORT: 5432
+    networks:
+      step5-compose-network:
+        aliases:
+          - postgres
+          - postgres.step5-compose-network
+    healthcheck:
+      retries: 9
+      timeout: 3s
+      interval: 3s
+      test: pg_isready -h 127.0.0.1 -p $$POSTGRES_PORT -d $$POSTGRES_DB -U $$POSTGRES_USER
+  sessions:
+    image: openjdk:8u212-jre-alpine
+    labels:
+      MAINTAINER: Maksim Kostromin https://github.com/daggerok
+    volumes: ['./step5-sessions-rsocket-service/target:/tmp']
+    entrypoint: ash -c 'java -jar /tmp/*.jar'
+    ports: ['8093:8093']
+    environment:
+      SERVER_PORT: 8093
+      POSTGRES_DB: postgres
+      POSTGRES_USER: postgres
+      POSTGRES_PASSWORD: postgres
+      POSTGRES_HOST: postgres
+      POSTGRES_PORT: 5432
+    depends_on:
+      postgres:
+        condition: service_healthy
+    networks:
+      step5-compose-network:
+        aliases:
+          - sessions
+          - sessions.step5-compose-network
+    healthcheck:
+      retries: 9
+      timeout: 3s
+      interval: 3s
+      test: wget --quiet --tries=1 --spider http://127.0.0.1:$$SERVER_PORT/actuator/health || exit
+  speakers:
+    image: openjdk:8u212-jre-alpine
+    labels:
+      MAINTAINER: Maksim Kostromin https://github.com/daggerok
+    volumes: ['./step5-speakers-rest-api-service/target:/tmp']
+    entrypoint: ash -c 'java -jar /tmp/*.jar'
+    ports: ['8094:8094']
+    environment:
+      SERVER_PORT: 8094
+      POSTGRES_DB: postgres
+      POSTGRES_USER: postgres
+      POSTGRES_PASSWORD: postgres
+      POSTGRES_HOST: postgres
+      POSTGRES_PORT: 5432
+    depends_on:
+      postgres:
+        condition: service_healthy
+    networks:
+      step5-compose-network:
+        aliases:
+          - speakers
+          - speakers.step5-compose-network
+    healthcheck:
+      retries: 9
+      timeout: 3s
+      interval: 3s
+      test: wget --quiet --tries=1 --spider http://127.0.0.1:$$SERVER_PORT/actuator/health || exit
+  frontend:
+    image: openjdk:8u212-jre-alpine
+    labels:
+      MAINTAINER: Maksim Kostromin https://github.com/daggerok
+    volumes: ['./step5-frontend/target:/tmp']
+    entrypoint: ash -c 'java -jar /tmp/*.jar'
+    ports: ['8092:8092']
+    environment:
+      SERVER_PORT: 8092
+      SESSIONS_HOST: sessions
+      SESSIONS_PORT: 8093
+      SPEAKERS_HOST: speakers
+      SPEAKERS_PORT: 8094
+    depends_on:
+      sessions:
+        condition: service_healthy
+      speakers:
+        condition: service_healthy
+    networks:
+      step5-compose-network:
+        aliases:
+          - frontend
+          - frontend.step5-compose-network
+    healthcheck:
+      retries: 9
+      timeout: 3s
+      interval: 3s
+      test: wget --quiet --tries=1 --spider http://127.0.0.1:$$SERVER_PORT/actuator/health || exit
+  healthcheck:
+    image: openjdk:8u212-jre-alpine
+    depends_on:
+      postgres:
+        condition: service_started
+      sessions:
+        condition: service_started
+      speakers:
+        condition: service_started
+      frontend:
+        condition: service_healthy
