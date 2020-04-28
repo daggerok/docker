@@ -7,6 +7,6 @@ HEALTHCHECK --retries=33 \
             --interval=3s \
             --start-period=3s \
             CMD  wget -q --spider http://127.0.0.1:8080/my-service/health || exit 1
-           #CMD curl -f http://127.0.0.1:8080/my-servicehealth           || exit 1
-           #CMD test `netstat -ltnp | grep 9990 | wc -l` -ge 1           || exit 1
+           #CMD curl -f http://127.0.0.1:8080/my-servicehealth            || exit 1
+           #CMD test `netstat -ltnp | grep 9990 | wc -l` -ge 1            || exit 1
 COPY --chown=jboss ./target/*.war ${JBOSS_HOME}/standalone/deployments/my-service.war
