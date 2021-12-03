@@ -1,0 +1,5 @@
+my-redis:
+  container_name: my-redis
+  image: redis
+  ports:
+    - "6379:6379"
