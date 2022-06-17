@@ -1,7 +1,11 @@
 name: h2
-on: [push]
+on:
+  push:
+    paths:
+      - 'h2/Dockerfile'
+      - '.github/workflows/h2.yml'
 jobs:
-  h2:
+  test-h2:
     name: test h2
     if: github.event.inputs.trigger == ''
       || !startsWith(github.event.inputs.trigger, 'm')
@@ -30,3 +34,26 @@ jobs:
       - run: npm_config_yes=true npx wait-port 8082 9092
       - run: http --ignore-stdin :8082
       - run: docker stop h2
+  push-h2:
+    name: Push daggerok/h2 Docker image to Docker Hub
+    runs-on: ubuntu-latest
+    steps:
+      - uses: actions/checkout@v3
+      - name: Log in to Docker Hub
+        uses: docker/login-action@v2
+        with:
+          username: ${{ secrets.DOCKER_USERNAME }}
+          password: ${{ secrets.DOCKER_PASSWORD }}
+      - name: Extract metadata (tags, labels) for Docker
+        id: meta
+        uses: docker/metadata-action@v3
+        with:
+          images: daggerok/h2
+      - name: Build and push Docker image
+        uses: docker/build-push-action@v3
+        with:
+          file: "./h2/Dockerfile"
+          context: .
+          push: true
+          tags: ${{ steps.meta.outputs.tags }},${{ secrets.DOCKER_USERNAME }}/h2:latest
+          labels: ${{ steps.meta.outputs.labels }}
