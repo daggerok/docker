@@ -1,0 +1,32 @@
+name: h2
+on: [push]
+jobs:
+  h2:
+    name: test h2
+    if: github.event.inputs.trigger == ''
+      || !startsWith(github.event.inputs.trigger, 'm')
+      || !startsWith(github.event.inputs.trigger, 'M')
+    runs-on: ubuntu-latest
+    steps:
+      - uses: actions/checkout@v1
+      - uses: actions/cache@v3
+        with:
+          path: |
+            ~/.docker
+          key: ${{ runner.os }}-h2
+      - run: if [[ "" != `docker ps -aq` ]] ; then docker rm -f -v `docker ps -aq` ; fi
+      - uses: actions/setup-node@v3
+        with:
+          node-version: 18.2.0
+      - run: sudo apt install -y httpie
+      - run: docker build --no-cache -t daggerok/h2 -f $GITHUB_WORKSPACE/h2/Dockerfile .
+      #- run: |
+      #    mkdir -p /tmp/h2/data ; docker run --rm -d -p 8082:8082 -p 9092:9092 --name h2 -v /tmp/h2/data:/home/h2/data \
+      #      --health-start-period=1s --health-retries=1111 --health-interval=1s --health-timeout=5s \
+      #      --health-cmd='curl 127.0.0.1:8082 || exit 1' \
+      #      daggerok/h2
+      - run: mkdir -p /tmp/h2/data ; docker run --rm -d -p 8082:8082 -p 9092:9092 --name h2 -v /tmp/h2/data:/home/h2/data daggerok/h2
+      - run: while [[ $(docker ps -n 1 -q -f health=healthy -f status=running | wc -l) -lt 1 ]] ; do sleep 3 ; echo -n '.' ; done ; echo 'H2 is ready.'
+      - run: npm_config_yes=true npx wait-port 8082 9092
+      - run: http --ignore-stdin :8082
+      - run: docker stop h2
