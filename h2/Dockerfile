@@ -36,7 +36,7 @@ RUN apt-get --no-install-recommends -yqq update                             \
  && chown -Rcv ${H2_USERNANE}:${H2_USERNANE} ${H2_JAR} ${H2_DATA}
 
 HEALTHCHECK --start-period=1s --retries=3 --interval=3s --timeout=3s \
-        CMD curl "http://127.0.0.1:${H2_WEB_PORT}" || exit 1
+        CMD ( curl --silent --fail "127.0.0.1:${H2_WEB_PORT}" ) || exit 1
 
 USER ${H2_USERNANE}
 WORKDIR ${H2_USER_HOME}
